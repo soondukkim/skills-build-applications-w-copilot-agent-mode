@@ -1,8 +1,20 @@
 from djongo import models
 from django.contrib.auth.models import AbstractUser
 
+from django.contrib.auth.models import Group, Permission
+
 class User(AbstractUser):
     email = models.EmailField(unique=True)
+    groups = models.ManyToManyField(
+        Group,
+        related_name='octofittracker_user_groups',
+        blank=True
+    )
+    user_permissions = models.ManyToManyField(
+        Permission,
+        related_name='octofittracker_user_permissions',
+        blank=True
+    )
     class Meta:
         app_label = 'octofit_tracker'
 

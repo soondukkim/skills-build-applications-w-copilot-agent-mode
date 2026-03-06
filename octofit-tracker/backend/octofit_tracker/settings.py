@@ -1,3 +1,9 @@
+# Application definition
+
+import os
+# Codespace 환경 변수 사용 예시
+# API 엔드포인트 예시: https://$CODESPACE_NAME-8000.app.github.dev/api/activities/
+CODESPACE_NAME = os.environ.get('CODESPACE_NAME', '')
 """
 Django settings for octofit_tracker project.
 
@@ -25,7 +31,16 @@ SECRET_KEY = 'django-insecure-g94c2k1g^+zcqanjw&=y5jdo-xp3)ks*e92jllusl2$9kob)4o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+import os
+CODESPACE_NAME = os.environ.get('CODESPACE_NAME', '')
+
+# Codespace 및 로컬 개발 환경에서 정상 동작하도록 ALLOWED_HOSTS 설정
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    f'{CODESPACE_NAME}-8000.app.github.dev' if CODESPACE_NAME else '',
+    '*',  # 개발 환경에서 모든 호스트 허용
+]
 
 # Application definition
 
